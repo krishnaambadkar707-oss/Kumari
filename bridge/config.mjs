@@ -89,7 +89,7 @@ export function readConfig(env = process.env) {
     },
     models: {
       gemini: (env.KUMARI_GEMINI_MODEL ?? 'auto').trim() || 'auto',
-      anthropic: (env.KUMARI_ANTHROPIC_MODEL ?? 'claude-sonnet-5-5').trim(),
+      anthropic: (env.KUMARI_ANTHROPIC_MODEL ?? 'claude-sonnet-4-5').trim(),
       openai: (env.KUMARI_OPENAI_MODEL ?? 'gpt-4o-mini').trim(),
       groq: (env.KUMARI_GROQ_MODEL ?? 'llama-3.3-70b-versatile').trim(),
       ollama: (env.KUMARI_OLLAMA_MODEL ?? '').trim(),

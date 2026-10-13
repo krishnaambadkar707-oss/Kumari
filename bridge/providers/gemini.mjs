@@ -26,10 +26,10 @@ const BASE =
 
 /** Used only when the live list cannot be read. Newest first. */
 export const STATIC_FALLBACKS = [
-  'gemini-3.6-flash',
-  'gemini-3.5-flash',
-  'gemini-3.1-flash-lite',
   'gemini-2.5-flash',
+  'gemini-2.5-flash-lite',
+  'gemini-2.0-flash-lite',
+  'gemini-1.5-flash',
 ]
 
 /** Gemini's schema dialect is a subset of OpenAPI. Strip what it refuses. */
@@ -117,9 +117,6 @@ export function toGeminiContents(messages) {
 
 /** Which thinking settings to try for a model, most preferred first. */
 export function thinkingOptions(model) {
-  if (/gemini-3/.test(model)) {
-    return [{ thinkingLevel: 'minimal' }, { thinkingLevel: 'low' }, null]
-  }
   if (/gemini-2\.5/.test(model)) return [{ thinkingBudget: 0 }, null]
   return [null]
 }
@@ -318,7 +315,7 @@ export function rankGeminiModels(models) {
     .filter((m) => (m.supportedGenerationMethods ?? []).includes('generateContent'))
     .map((m) => String(m.name).replace(/^models\//, ''))
 
-  const bad = /(image|tts|audio|live|embed|robot|computer|vision|learnlm|gemma|aqa|imagen|veo|lyria|deep-research|customtools|exp|antigravity|native)/i
+  const bad = /(image|tts|audio|live|embed|robot|computer|vision|learnlm|gemma|aqa|imagen|veo|lyria|deep-research|customtools|native)/i
   const candidates = usable.filter((n) => /^gemini-/.test(n) && !bad.test(n))
 
   const version = (n) => {
